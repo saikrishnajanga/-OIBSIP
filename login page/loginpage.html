@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Authentication with Parallax & Animated BG</title>
+<link rel="stylesheet" href="styles.css">
+   
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Register Form -->
+    <div class="container" id="register-form">
+      <h2>Register</h2>
+      <input type="text" id="reg-username" placeholder="Username" required onkeypress="handleEnterKey(event, 'reg-password')" />
+      <input type="password" id="reg-password" placeholder="Password" required onkeypress="handleEnterKey(event, 'register')" />
+      <button onclick="register()">Sign Up</button>
+      <div class="switch-link" onclick="showLogin()">Already have an account? Login</div>
+      <div class="message" id="reg-message"></div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container hidden" id="login-form">
+      <h2>Login</h2>
+      <input type="text" id="login-username" placeholder="Username" required onkeypress="handleEnterKey(event, 'login-password')" />
+      <input type="password" id="login-password" placeholder="Password" required onkeypress="handleEnterKey(event, 'login')" />
+      <button onclick="login()">Login</button>
+      <div class="switch-link" onclick="showRegister()">Don't have an account? Register</div>
+      <div class="switch-link" onclick="forgotPassword()">Forgot Password?</div>
+      <div class="message error-message" id="login-message"></div>
+    </div>
+
+    <!-- Forgot Password -->
+    <div class="container hidden" id="forgot-mobile-form">
+      <h2>Forgot Password</h2>
+      <input type="text" id="mobile-number" placeholder="Enter Mobile Number" maxlength="15" onkeypress="handleEnterKey(event, 'sendOTP')" />
+      <button onclick="sendOTP()">Send OTP</button>
+      <div class="message error-message" id="mobile-message"></div>
+      <div class="switch-link" onclick="showLogin()">Back to Login</div>
+    </div>
+
+    <!-- OTP Verification -->
+    <div class="container hidden" id="otp-form">
+      <h2>OTP Verification</h2>
+      <p>Demo OTP sent to your mobile number:</p>
+      <div class="message" id="otp-display"></div>
+      <input type="text" id="otp-input" placeholder="Enter OTP" maxlength="6" onkeypress="handleEnterKey(event, 'verifyOTP')" />
+      <button onclick="verifyOTP()">Verify OTP</button>
+      <div class="message error-message" id="otp-message"></div>
+      <div class="switch-link" onclick="showLogin()">Cancel and Login</div>
+    </div>
+
+    <!-- Reset Credentials Form -->
+    <div class="container hidden" id="reset-form">
+      <h2>Reset Username & Password</h2>
+      <input type="text" id="reset-username" placeholder="New Username" required onkeypress="handleEnterKey(event, 'reset-password')" />
+      <input type="password" id="reset-password" placeholder="New Password" required onkeypress="handleEnterKey(event, 'resetCredentials')" />
+      <button onclick="resetCredentials()">Update</button>
+      <div class="message" id="reset-message"></div>
+    </div>
+
+    <!-- Secure Page -->
+    <div class="container hidden" id="secure-page">
+      <h2>Welcome, <span id="user-display"></span> 🎉</h2>
+      <p>This is a secure page only visible after login.</p>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>✅ Registered Successfully!</h2>
+      <p>You can now login with your new credentials.</p>
+      <button onclick="closeModal()">OK</button>
+    </div>
+  </div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
