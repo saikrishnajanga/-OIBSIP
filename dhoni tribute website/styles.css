@@ -1,0 +1,290 @@
+ /* Body and background: Biscuit color */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #222;
+    background: #F5F0E6; /* Biscuit color */
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Main container - left-aligned with max width */
+  .container {
+    flex: 1;
+    max-width: 1100px;
+    margin-left: 0;      /* align to left */
+    margin-right: auto;  /* push right side automatically */
+    padding: 30px 50px;
+  }
+
+  /* Header section */
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-family: 'Georgia', serif;
+    font-size: 3.5rem;
+    color: #004a9a;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  header p {
+    font-size: 1.3rem;
+    color: #31708e;
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0;
+  }
+
+  /* Biography section */
+  .bio-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  .bio-text {
+    flex: 2 1 600px;
+    font-size: 1.15rem;
+    color: #2a2a2a;
+  }
+  .bio-text p {
+    color: #3a3a3a;
+    font-size: 1.18rem;
+    line-height: 1.75;
+    font-weight: 500;
+    text-shadow: 0 1px 0 #fafafa;
+    border-left: 4px solid #004a9a;
+    padding-left: 12px;
+    margin-bottom: 1.3em;
+    letter-spacing: 0.02em;
+    background: rgba(240,240,250,0.2);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* Image gallery */
+  .bio-images {
+    flex: 1 1 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 12px;
+  }
+  .bio-images img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    cursor: pointer;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    background: #eee;
+  }
+  .bio-images img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  }
+
+  /* Achievements Section */
+  .achievements {
+    margin-bottom: 50px;
+  }
+  .achievements h2 {
+    font-family: 'Georgia', serif;
+    color: orangered;
+    font-size: 2.25rem;
+    border-bottom: 3px solid #31708e;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+  }
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .achievement-card {
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  /* Animated and stylish card backgrounds with shadows and text colors in light blue shades */
+  .slide-left {
+    background-color: #a8d0ff; /* Light sky blue */
+    animation: slideLeftAnim 3s ease-in-out infinite alternate;
+    color: #063970; /* Dark blue for contrast */
+    box-shadow: 0 8px 20px rgba(168, 208, 255, 0.6);
+  }
+  @keyframes slideLeftAnim {
+    0% {
+      transform: translateX(-20px);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-right {
+    background-color: #c5dbff; /* Lighter baby blue */
+    animation: slideRightAnim 3s ease-in-out infinite alternate;
+    color: #054a91;
+    box-shadow: 0 8px 20px rgba(197, 219, 255, 0.6);
+  }
+  @keyframes slideRightAnim {
+    0% {
+      transform: translateX(20px);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .fade-pop {
+    background-color: #b3d9ff; /* Soft blue */
+    animation: fadePopAnim 2.5s ease-in-out infinite alternate;
+    color: #135ba0;
+    box-shadow: 0 8px 20px rgba(179, 217, 255, 0.6);
+  }
+  @keyframes fadePopAnim {
+    0% {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  .scale-bounce {
+    background-color: #99ccff; /* Medium light blue */
+    animation: scaleBounceAnim 2.8s ease-in-out infinite alternate;
+    color: #0e4a80;
+    box-shadow: 0 8px 20px rgba(153, 204, 255, 0.6);
+  }
+  @keyframes scaleBounceAnim {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 8px 20px rgba(153, 204, 255, 0.6);
+    }
+    50% {
+      transform: scale(1.07);
+      box-shadow: 0 12px 34px rgba(153, 204, 255, 0.9);
+    }
+  }
+
+  /* Records Section */
+  .records {
+    margin-bottom: 50px;
+  }
+  .records h2 {
+    font-family: 'Georgia', serif;
+    color: #004a9a;
+    font-size: 2.25rem;
+    border-bottom: 3px solid #31708e;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+  }
+  .records-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .record-item {
+    background: #e0f2f1;
+    border-left: 6px solid #00897b;
+    color: #004d40;
+    font-weight: 600;
+    font-size: 1.12rem;
+    padding: 18px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,77,64,0.12);
+  }
+
+  /* Honours Section */
+  .honours {
+    margin-bottom: 50px;
+  }
+  .honours h2 {
+    font-family: 'Georgia', serif;
+    color: #004a9a;
+    font-size: 2.25rem;
+    border-bottom: 3px solid #31708e;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+  }
+  .honours-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .honour-item {
+    flex: 1 1 100%;
+    background: #e8f1f8;
+    border-left: 6px solid #31708e;
+    padding: 22px 28px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    font-size: 1.1rem;
+    color: #2a3f66;
+    font-weight: 600;
+  }
+
+  /* Legacy section */
+  .legacy {
+    background: #d5e3f1;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    font-size: 1.4rem;
+    line-height: 1.7;
+    margin-bottom: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .legacy h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-family: 'Georgia', serif;
+    font-size: 2rem;
+    color: #03396c;
+  }
+  .legacy p {
+    font-size: 1.6rem;
+    color: gray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.8;
+    margin-bottom: 1.2em;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #004a9a;
+    color: #f0f4f8;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 900px) {
+    .container {
+      max-width: 100%;
+      padding: 18px 8px;
+    }
+    .bio-section {
+      flex-direction: column;
+    }
+  }
