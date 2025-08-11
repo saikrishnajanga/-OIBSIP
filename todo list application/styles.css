@@ -1,0 +1,521 @@
+ body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #89f7fe, #66a6ff, #c3cfe2, #d4fc79);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px #0003;
+  }
+  .task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+  .task-input textarea {
+    flex: 1 1 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 60px;
+    outline: none;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .task-input button {
+    padding: 15px 25px;
+    border: none;
+    background: #1976d2;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .task-input button:hover {
+    background-color: #0d47a1;
+    transform: translateY(-2px);
+  }
+  #popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffdddd;
+    color: #a80000;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    animation: popupAnim 0.3s ease;
+    z-index: 1000;
+    text-align: center;
+    max-width: 80%;
+  }
+  @keyframes popupAnim {
+    from {opacity: 0; transform: translate(-50%, -60%);}
+    to {opacity: 1; transform: translate(-50%, -50%);}
+  }
+  .lists-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .task-section {
+    flex: 1 1 50%;
+    background: rgba(255,255,255,0.85);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 700px) {
+    .lists-container { flex-direction: column; }
+    .task-section { flex: 1 1 100%; }
+  }
+  h2 {
+    border-bottom: 2px solid #6fb1fc;
+    padding-bottom: 5px;
+    margin-top: 0;
+    color: #333;
+  }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li {
+    background: white;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-left: 5px solid #1976d2;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.4s forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0px); } }
+  .completed-task {
+    border-left-color: #388e3c;
+    background: #e4f6e5;
+    color: #666;
+  }
+  .completed-task .task-details strong { text-decoration: line-through; }
+  .task-details {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .task-time { font-size: 0.8rem; color: #777; margin-left: 8px; }
+  .task-actions {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .task-actions button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  .task-actions button:hover { transform: scale(1.1); }
+  .edit-btn { background-color: #f9a825; color: #000; }
+  .complete-btn { background-color: #2e7d32; }
+  .delete-btn { background-color: #c62828; }
+  .task-checkbox {
+    width: 20px; height: 20px;
+    accent-color: #388e3c; cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .task-checkbox:hover { transform: scale(1.2); }
+
+  /* Trash Animation Improved */
+  #trashAnim {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1200;
+    background: none;
+    display: none;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .trash-icon {
+    position: relative;
+    width: 90px; height: 90px;
+    display: flex; align-items: center; justify-content: center;
+    animation: trashAppear 1s ease forwards;
+  }
+  @keyframes trashAppear {
+    0% { opacity: 0; transform: translateY(30px) scale(0.5); }
+    70% { opacity: 1; transform: translateY(0) scale(1.1) rotate(5deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  }
+  .can {
+    width: 44px; height: 48px;
+    background: #53596e;
+    border-radius: 0 0 14px 14px;
+    position: absolute;
+    bottom: 0; left: 24px;
+    box-shadow: 0 4px 10px #2224;
+  }
+  .lid {
+    width: 50px; height: 14px;
+    background: #707788;
+    border-radius: 7px 7px 3px 3px;
+    position: absolute;
+    left: 20px; top: 4px;
+    animation: lidShake 1s ease infinite alternate;
+    transform-origin: center bottom;
+  }
+  @keyframes lidShake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(12deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* Congratulations Animation */
+  #congratsAnim {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1200;
+    background: none;
+    display: none;
+  }
+  .congrats-box {
+    padding: 40px 70px;
+    background: #faffc1;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px #f6d44477;
+    display: flex;
+    align-items: center; gap: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #088e30;
+    animation: congratsPop 1.3s cubic-bezier(.6,-.4,.4,1.2);
+  }
+  @keyframes congratsPop {
+    0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
+    50% { transform: scale(1.3) rotate(9deg); opacity: 1; }
+    80% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.01); }
+  }
+  .star { animation: starTwinkle 1s alternate infinite; }
+  @keyframes starTwinkle {
+    0% { filter: blur(0px); opacity: 0.8; font-size: 2.2rem;}
+    100% { filter: blur(3px); opacity: 1; font-size: 2.4rem;}
+  }
+
+  /* Editable input with OK button styling */
+  .edit-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;
+  }
+  .editable-input {
+    flex: 1;
+    font-size: 1rem;
+    padding: 2px 6px;
+    border: 2px solid #1976d2;
+    border-radius: 4px;
+    outline: none;
+  }
+  .ok-btn {
+    background-color: #1976d2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  .ok-btn:hover {
+    background-color: #0d47a1;
+  } body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #89f7fe, #66a6ff, #c3cfe2, #d4fc79);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px #0003;
+  }
+  .task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+  .task-input textarea {
+    flex: 1 1 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 60px;
+    outline: none;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .task-input button {
+    padding: 15px 25px;
+    border: none;
+    background: #1976d2;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .task-input button:hover {
+    background-color: #0d47a1;
+    transform: translateY(-2px);
+  }
+  #popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffdddd;
+    color: #a80000;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    animation: popupAnim 0.3s ease;
+    z-index: 1000;
+    text-align: center;
+    max-width: 80%;
+  }
+  @keyframes popupAnim {
+    from {opacity: 0; transform: translate(-50%, -60%);}
+    to {opacity: 1; transform: translate(-50%, -50%);}
+  }
+  .lists-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .task-section {
+    flex: 1 1 50%;
+    background: rgba(255,255,255,0.85);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 700px) {
+    .lists-container { flex-direction: column; }
+    .task-section { flex: 1 1 100%; }
+  }
+  h2 {
+    border-bottom: 2px solid #6fb1fc;
+    padding-bottom: 5px;
+    margin-top: 0;
+    color: #333;
+  }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li {
+    background: white;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-left: 5px solid #1976d2;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.4s forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0px); } }
+  .completed-task {
+    border-left-color: #388e3c;
+    background: #e4f6e5;
+    color: #666;
+  }
+  .completed-task .task-details strong { text-decoration: line-through; }
+  .task-details {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .task-time { font-size: 0.8rem; color: #777; margin-left: 8px; }
+  .task-actions {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .task-actions button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  .task-actions button:hover { transform: scale(1.1); }
+  .edit-btn { background-color: #f9a825; color: #000; }
+  .complete-btn { background-color: #2e7d32; }
+  .delete-btn { background-color: #c62828; }
+  .task-checkbox {
+    width: 20px; height: 20px;
+    accent-color: #388e3c; cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .task-checkbox:hover { transform: scale(1.2); }
+
+  /* Trash Animation Improved */
+  #trashAnim {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1200;
+    background: none;
+    display: none;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .trash-icon {
+    position: relative;
+    width: 90px; height: 90px;
+    display: flex; align-items: center; justify-content: center;
+    animation: trashAppear 1s ease forwards;
+  }
+  @keyframes trashAppear {
+    0% { opacity: 0; transform: translateY(30px) scale(0.5); }
+    70% { opacity: 1; transform: translateY(0) scale(1.1) rotate(5deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  }
+  .can {
+    width: 44px; height: 48px;
+    background: #53596e;
+    border-radius: 0 0 14px 14px;
+    position: absolute;
+    bottom: 0; left: 24px;
+    box-shadow: 0 4px 10px #2224;
+  }
+  .lid {
+    width: 50px; height: 14px;
+    background: #707788;
+    border-radius: 7px 7px 3px 3px;
+    position: absolute;
+    left: 20px; top: 4px;
+    animation: lidShake 1s ease infinite alternate;
+    transform-origin: center bottom;
+  }
+  @keyframes lidShake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(12deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* Congratulations Animation */
+  #congratsAnim {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1200;
+    background: none;
+    display: none;
+  }
+  .congrats-box {
+    padding: 40px 70px;
+    background: #faffc1;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px #f6d44477;
+    display: flex;
+    align-items: center; gap: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #088e30;
+    animation: congratsPop 1.3s cubic-bezier(.6,-.4,.4,1.2);
+  }
+  @keyframes congratsPop {
+    0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
+    50% { transform: scale(1.3) rotate(9deg); opacity: 1; }
+    80% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.01); }
+  }
+  .star { animation: starTwinkle 1s alternate infinite; }
+  @keyframes starTwinkle {
+    0% { filter: blur(0px); opacity: 0.8; font-size: 2.2rem;}
+    100% { filter: blur(3px); opacity: 1; font-size: 2.4rem;}
+  }
+
+  /* Editable input with OK button styling */
+  .edit-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;
+  }
+  .editable-input {
+    flex: 1;
+    font-size: 1rem;
+    padding: 2px 6px;
+    border: 2px solid #1976d2;
+    border-radius: 4px;
+    outline: none;
+  }
+  .ok-btn {
+    background-color: #1976d2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  .ok-btn:hover {
+    background-color: #0d47a1;
+  }

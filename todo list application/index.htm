@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do App - Enhanced Trash Animation & Edit with OK</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>✨ Daily To-Do List</h1>
+
+<div id="popup">Please enter your task</div>
+
+<div class="task-input">
+  <textarea id="taskInput" placeholder="Enter your task..."></textarea>
+  <button onclick="addTask()">Add Task</button>
+</div>
+
+<div class="lists-container">
+  <div class="task-section">
+    <h2>📌 Pending Tasks</h2>
+    <ul id="pendingList"></ul>
+  </div>
+  <div class="task-section">
+    <h2>✅ Completed Tasks</h2>
+    <ul id="completedList"></ul>
+  </div>
+</div>
+
+<!-- Trash Animation -->
+<div id="trashAnim">
+  <div class="trash-icon">
+    <div class="can"></div>
+    <div class="lid"></div>
+  </div>
+</div>
+
+<!-- Congratulations Animation -->
+<div id="congratsAnim">
+  <div class="congrats-box">
+    <span class="star">✨</span>
+    <span class="text">Congratulations!</span>
+    <span class="star">✨</span>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
